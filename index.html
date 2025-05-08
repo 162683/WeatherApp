@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="gl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Exercicio61</title>
+    <meta name="keywords" content="tempo, clima, metereoloxía, galicia" />
+
+    <meta name="MobileOptimized" content="width" />
+    <meta name="HanheldFriendly" content="true" />
+
+    <!-- Meta etiquetas PWA para Apple -->
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <link
+      rel="apple-touch-startup-image"
+      href="assets/favicons/favicon_96x96@1x.png"
+    />
+
+    <!-- Configuración General PWA -->
+    <link rel="manifest" href="manifest.json" />
+
+    <!-- Favicons -->
+    <link rel="shortcut icon" href="assets/favicons/favicon_16x16@1x.png" />
+    <link rel="apple-touch-icon" href="assets/favicons/favicon_32x32@1x.png" />
+    <link
+      rel="apple-touch-icon"
+      sizes="48x48"
+      href="assets/favicons/favicon_48x48@1x.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="96x96"
+      href="assets/favicons/favicon_96x96@1x.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="152x152"
+      href="assets/favicons/favicon_152x152@1x.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="167x167"
+      href="assets/favicons/favicon_167x167@1x.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="assets/favicons/favicon_180x180@1x.png"
+    />
+    <link
+      rel="icon"
+      sizes="192x192"
+      href="assets/favicons/favicon_192x192@1x.png"
+    />
+    <link
+      rel="icon"
+      sizes="512x512"
+      href="assets/favicons/favicon_512x512@1x.png"
+    />
+
+    <link rel="stylesheet" href="./styles/bulma.min.css">
+    <link rel="stylesheet" href="./styles/style.css">
+</head>
+
+<body>
+    <header>
+        <nav class="navbar is-primary" role="navigation" aria-label="main navigation">
+            <div class="navbar-brand">
+                <a class="navbar-item title is-2" href="#">
+                    Clima Local
+
+                </a>
+
+                <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false"
+                    data-target="navbarBasicExample">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </a>
+            </div>
+
+            <div id="navbarBasicExample" class="navbar-menu">
+                <div class="navbar-start">
+                    <a class="navbar-item " onclick="actualizarDatos(42.845, -8.5782)">
+                        O Milladoiro
+                    </a>
+
+                    <a class="navbar-item" onclick="actualizarDatos(43.0331, -8.8093)">
+                        Santa comba
+                    </a>
+
+                    <a class="navbar-item" onclick="actualizarDatos(42.8805, -8.5457)">
+                        Santiago de Compostela
+                    </a>
+                    <a class="navbar-item" onclick="actualizarDatos( 58.3019, -134.4197)">
+                        Juneau
+                    </a>
+
+                    <a class="navbar-item " href="buscar.html">Buscar</a>
+
+                </div>
+
+
+            </div>
+        </nav>
+    </header>
+
+    <main class="mt-5">
+
+        <section>
+            <div class="container" id="contedor">
+                <div class="columns">
+                    <div class="column">
+                        <div class="location is-flex is-justify-content-center is-align-items-center">
+                            <img src="./assets/location_icon.svg" alt="Icono de busqueda">
+                            <h3 id="location" class="title is-2 has-text-black ml-3">O Milladoiro</h3>
+                        </div>
+                        <div class="location is-flex is-justify-content-center is-align-items-center">
+                            <p id="description"
+                                class="p__detalle is-flex is-justify-content-center is-capitalized is-italic "></p>
+                        </div>
+                        <div class="hora is-flex is-justify-content-center is-align-items-center">
+                            <p id="local" class="local__hora"></p>
+
+                        </div>
+
+                        <div class="location is-flex is-justify-content-center is-align-items-center ">
+                            <img id="weatherIcon" src="./assets/iconos/01d.png" alt="Icono de busqueda" width="250px">
+                        </div>
+
+
+                        <div class="temperatura is-flex is-justify-content-center is-align-items-center  ">
+                            <h3 class="temperatura__h3 title is-1 has-text-black" id="ClimaTemperatura"></h3>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </section>
+
+        <div id="containerForecast">
+            <template id="templateForecast">
+                <div class="forecast__card">
+                    <h4 id="horaForecast" class="forecast__hora"></h4>
+                    <img id="iconoForecast" class="forecast__icono" src=”” alt=””>
+                    <p id="temperaturaForecast" class="forecast__temperatura"></p>
+                </div>
+            </template>
+        </div>
+
+        <div class="columns is-multiline mx-4">
+            <div class="column">
+                <div
+                    class="box is-flex is-justify-content-space-between is-align-items-center has-background-white has-text-black ">
+                    <strong class="title is-5 has-text-black">Sensación térmica:</strong>
+                    <p id="feellike" class="subtitle is-4  has-text-black">20ºC</p>
+                </div>
+                <div
+                    class="box is-flex is-justify-content-space-between is-align-items-center  has-background-white has-text-black">
+                    <strong class="title is-5 has-text-black">Humidade:</strong>
+                    <p id="humidity" class="subtitle is-4  has-text-black">50%</p>
+                </div>
+                <div
+                    class="box is-flex is-justify-content-space-between is-align-items-center   has-background-white has-text-black  ">
+                    <strong class="title is-5 has-text-black">Hora Abrente</strong>
+                    <p id="abrente" class="subtitle is-4  has-text-black"></p>
+                </div>
+            </div>
+            <div class="column">
+                <div
+                    class="box is-flex is-justify-content-space-between is-align-items-center   has-background-white has-text-black ">
+                    <strong class="title is-5 has-text-black">Temp. máxima:</strong>
+                    <p id="tempMax" class="subtitle is-4  has-text-black">10ºC</p>
+                </div>
+                <div
+                    class="box is-flex is-justify-content-space-between is-align-items-center   has-background-white has-text-black  ">
+                    <strong class="title is-5 has-text-black">Temp. minima:</strong>
+                    <p id="tempMin" class="subtitle is-4  has-text-black">20ºC</p>
+                </div>
+
+                <div
+                    class="box is-flex is-justify-content-space-between is-align-items-center   has-background-white has-text-black  ">
+                    <strong class="title is-5 has-text-black">Hora Solpor</strong>
+                    <p id="solpor" class="subtitle is-4  has-text-black"></p>
+                </div>
+
+
+            </div>
+        </div>
+
+        <div class="fondo__dia" id="imagendia">
+
+        </div>
+        <div class="fondo__noite" id="imagennoite">
+
+        </div>
+
+
+    </main>
+    <script src="./js/script.js"></script>
+</body>
+
+</html>
