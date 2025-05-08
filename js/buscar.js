@@ -3,7 +3,7 @@
   const API_KEY = "5cac41e4b55530410385b093afae06ea"
 
 async function obterCidadeTempo(city) {
-  const apiURL =`http://api.openweathermap.org/geo/1.0/direct?q=${city},&limit=${5}&appid=${API_KEY}`;
+  const apiURL =`https://api.openweathermap.org/geo/1.0/direct?q=${city},&limit=${5}&appid=${API_KEY}`;
   try {
     const response = await fetch(apiURL);
     return await response.json();
